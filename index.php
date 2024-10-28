@@ -32,8 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$password', '$email')";
     if ($conn->query($sql) === TRUE) {
       $signupMessage = "Registration successful!";
-      header("Location: http://localhost/TravelWebsite/Home.html");
-      exit();
     } else {
       $signupMessage = "Error: " . $conn->error;
     }
@@ -52,9 +50,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (password_verify($password, $row['password'])) {
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $username;
-        $loginMessage = "Login successful!";
-        header("Location: http://localhost/TravelWebsite/Home.html");
-        exit();
+        $loginMessage = "Login successful! Redirecting...";
+        echo "<script>
+                        setTimeout(function() {
+                            window.location.href = 'http://localhost/TravelWebsite/Home.php';
+                        }, 2000);
+                      </script>";
       } else {
         $loginMessage = "Invalid password.";
       }
@@ -81,8 +82,24 @@ ob_end_flush(); // End output buffering
 
   <!-- Font Awesome CDN link for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
   <style>
     /* Global Styling */
+    h1 {
+      font-size: 50px;
+      color: white;
+      text-shadow: 0 0 10px #00f0ff, 0 0 20px #00bfff;
+      /* Neon glow effect */
+      font-weight: bold;
+      margin-top: 0;
+      margin-bottom: 20px;
+      /* Space below the header */
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+    }
+
     body {
       font-family: 'Arial', sans-serif;
       background-color: #000;
@@ -92,6 +109,8 @@ ob_end_flush(); // End output buffering
       min-height: 100vh;
       margin: 0;
       color: #fff;
+      flex-direction: column;
+      /* Stack items vertically */
     }
 
     /* Container Styling with Neon Border */
@@ -219,6 +238,11 @@ ob_end_flush(); // End output buffering
 </head>
 
 <body>
+  <!-- Logo Heading with AOS animation at the top center -->
+  <h1 class="logo">
+    <i class="fas fa-paper-plane"></i> Travel Genie
+  </h1>
+
   <div class="login-wrap">
     <div class="login-html">
       <input id="tab-1" type="radio" name="tab" class="sign-in" checked onclick="showForm()">
@@ -244,29 +268,32 @@ ob_end_flush(); // End output buffering
               <a href="#forgot">Forgot Password?</a>
             </div>
           </form>
+          <?php if (!empty($loginMessage)) {
+            echo "<p>$loginMessage</p>";
+          } ?>
         </div>
 
         <!-- Sign Up Form -->
         <div id="signup" class="form-container">
           <form method="POST" action="">
             <div class="group">
-              <label for="user_signup" class="label">Username</label>
-              <input id="user_signup" type="text" name="signup_user" class="input" required>
+              <label for="signup_user" class="label">Username</label>
+              <input id="signup_user" type="text" name="signup_user" class="input" required>
             </div>
             <div class="group">
-              <label for="pass_signup" class="label">Password</label>
-              <input id="pass_signup" type="password" name="signup_password" class="input" required>
+              <label for="signup_password" class="label">Password</label>
+              <input id="signup_password" type="password" name="signup_password" class="input" required>
             </div>
             <div class="group">
-              <label for="email" class="label">Email Address</label>
-              <input id="email" type="email" name="signup_email" class="input" required>
+              <label for="signup_email" class="label">Email</label>
+              <input id="signup_email" type="email" name="signup_email" class="input" required>
             </div>
             <div class="group">
               <input type="submit" name="signup" class="button" value="Sign Up">
             </div>
-            <div class="foot-lnk">
-              <label for="tab-1">Already a Member?</label>
-            </div>
+            <?php if (!empty($signupMessage)) {
+              echo "<p>$signupMessage</p>";
+            } ?>
           </form>
         </div>
       </div>
@@ -275,22 +302,18 @@ ob_end_flush(); // End output buffering
 
   <script>
     function showForm() {
-      const signinForm = document.getElementById('signin');
-      const signupForm = document.getElementById('signup');
-      const signInTab = document.getElementById('tab-1').checked;
+      const signin = document.getElementById("signin");
+      const signup = document.getElementById("signup");
+      const isSignIn = document.querySelector('input[name="tab"]:checked').id === 'tab-1';
 
-      // Show the active form based on selected tab
-      if (signInTab) {
-        signinForm.classList.add('active');
-        signupForm.classList.remove('active');
+      if (isSignIn) {
+        signin.classList.add('active');
+        signup.classList.remove('active');
       } else {
-        signupForm.classList.add('active');
-        signinForm.classList.remove('active');
+        signup.classList.add('active');
+        signin.classList.remove('active');
       }
     }
-
-    // Run on page load to ensure the correct form is displayed
-    showForm();
   </script>
 </body>
 

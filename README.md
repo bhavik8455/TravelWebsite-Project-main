@@ -14,7 +14,7 @@ To get started with the Travel Genie website, you can follow these steps:
 
 2. Open the project in your preferred code editor.
 
-3. Open the `home.html` file in your web browser to view the website.
+3. Open the `Home.php` file in your web browser to view the website.
 
 ## Features
 

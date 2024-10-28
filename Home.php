@@ -17,17 +17,33 @@
     <!-- custom js file link  -->
     <script src="js/script.js" defer></script>
 
+
+
+    <style>
+        .username {
+            font-size: 2rem;
+            /* Adjust font size as needed */
+            color: #00e6e6;
+            /* Neon blue color */
+            font-weight: bold;
+            text-shadow: 0 0 2px #00e6e6;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+
 </head>
 
 <body>
     <!-- header section starts  -->
 
     <header class="header">
-
         <div id="menu-btn" class="fas fa-bars"></div>
 
-        <a data-aos="zoom-in-left" data-aos-delay="150" href="#" class="logo"> <i class="fas fa-paper-plane"></i>Travel
-            Genie </a>
+        <a data-aos="zoom-in-left" data-aos-delay="150" href="#" class="logo">
+            <i class="fas fa-paper-plane"></i>Travel Genie
+        </a>
 
         <nav class="navbar">
             <ul>
@@ -36,38 +52,24 @@
                     <ul>
                         <li><a data-aos="zoom-in-left" data-aos-delay="300" href="#home">Char Dham &raquo</a>
                             <ul>
-                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Badrinath.html">Badrinath
-                                        Temple</a></li>
-                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Dwarka.html">Dwarka Temple</a>
-                                </li>
-                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Rameshwaram.html">Rameshwaram
-                                        Temple</a></li>
-                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Puri.html">Jagannath
-                                        Temple</a></li>
+                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Badrinath.html">Badrinath Temple</a></li>
+                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Dwarka.html">Dwarka Temple</a></li>
+                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Rameshwaram.html">Rameshwaram Temple</a></li>
+                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Puri.html">Jagannath Temple</a></li>
                             </ul>
                         </li>
                         <li><a data-aos="zoom-in-left" data-aos-delay="300" href="#home">Famous Temples &raquo</a>
                             <ul>
-                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Vaishno Devi.html">Vaishno
-                                        Devi Temple</a></li>
-                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Somnath.html">Somnath
-                                        Jyotirlinga</a></li>
-                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Ranakpur.html">Ranakpur
-                                        Temple</a></li>
-                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="#destination">Haridwar And
-                                        Hrishikesh</a></li>
-                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="#destination">Kashi
-                                        Vishwanath</a></li>
-                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="#destination">Kedarnath
-                                        Temple</a></li>
-                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="#destination">Venkateshwara
-                                        Temple</a></li>
-                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="#destination">Surya Mandir
-                                        &nbsp&nbsp&nbsp</a></li>
-
+                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Vaishno Devi.html">Vaishno Devi Temple</a></li>
+                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Somnath.html">Somnath Jyotirlinga</a></li>
+                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="Ranakpur.html">Ranakpur Temple</a></li>
+                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="#destination">Haridwar And Hrishikesh</a></li>
+                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="#destination">Kashi Vishwanath</a></li>
+                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="#destination">Kedarnath Temple</a></li>
+                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="#destination">Venkateshwara Temple</a></li>
+                                <li><a data-aos="zoom-in-left" data-aos-delay="300" href="#destination">Surya Mandir</a></li>
                             </ul>
                         </li>
-
                     </ul>
                 </li>
                 <li><a data-aos="zoom-in-left" data-aos-delay="900" href="Gallery.html">gallery</a></li>
@@ -75,9 +77,19 @@
             </ul>
         </nav>
 
-        <!-- <a data-aos="zoom-in-left" data-aos-delay="1300" href="login.php" class="btn">Login / Sign-up</a> -->
-
+        <?php
+        session_start();
+        if (isset($_SESSION['username'])) {
+            // Display username with icon if logged in
+            echo '<span data-aos="zoom-in-left" data-aos-delay="1300" class="username"><i class="fas fa-user"></i> ' . htmlspecialchars($_SESSION['username']) . '</span>';
+        } else {
+            // Display Login / Sign-up button if not logged in
+            echo '<a data-aos="zoom-in-left" data-aos-delay="1300" href="login.php" class="btn"><i class="fas fa-sign-in-alt"></i> Login / Sign-up</a>';
+        }
+        ?>
     </header>
+
+
 
     <!-- header section ends -->
 
@@ -485,14 +497,14 @@
 
             <div class="box " data-aos="fade-up " data-aos-delay="150 ">
                 <h3>Destinations</h3>
-                <a href="home.html " class="links "> <i class="fas fa-arrow-right "></i>Vaishno Devi Temple</a>
-                <a href="home.html " class="links "> <i class="fas fa-arrow-right "></i>Amarnath Dham</a>
-                <a href="home.html " class="links "> <i class="fas fa-arrow-right "></i>Golden Temple</a>
-                <a href="home.html " class="links "> <i class="fas fa-arrow-right "></i>Haridwar And Hrishikesh</a>
-                <a href="home.html " class="links "> <i class="fas fa-arrow-right "></i>Kashi Vishwanath</a>
-                <a href="home.html " class="links "> <i class="fas fa-arrow-right "></i>Kedarnath Temple</a>
-                <a href="home.html " class="links "> <i class="fas fa-arrow-right "></i>Venkateshwara Temple</a>
-                <a href="home.html " class="links "> <i class="fas fa-arrow-right "></i>Surya Mandir</a>
+                <a href="Home.php " class="links "> <i class="fas fa-arrow-right "></i>Vaishno Devi Temple</a>
+                <a href="Home.php " class="links "> <i class="fas fa-arrow-right "></i>Amarnath Dham</a>
+                <a href="Home.php " class="links "> <i class="fas fa-arrow-right "></i>Golden Temple</a>
+                <a href="Home.php " class="links "> <i class="fas fa-arrow-right "></i>Haridwar And Hrishikesh</a>
+                <a href="Home.php " class="links "> <i class="fas fa-arrow-right "></i>Kashi Vishwanath</a>
+                <a href="Home.php " class="links "> <i class="fas fa-arrow-right "></i>Kedarnath Temple</a>
+                <a href="Home.php " class="links "> <i class="fas fa-arrow-right "></i>Venkateshwara Temple</a>
+                <a href="Home.php " class="links "> <i class="fas fa-arrow-right "></i>Surya Mandir</a>
                 <a href="Somnath.html" class="links "> <i class="fas fa-arrow-right "></i>Somnath Jyotirlinga</a>
                 <a href="Ranakpur.html" class="links "> <i class="fas fa-arrow-right "></i>Ranakpur Temple</a>
             </div>
@@ -507,7 +519,7 @@
 
             <div class="box " data-aos="fade-up " data-aos-delay="300 ">
                 <h3>quick links</h3>
-                <a href="home.html " class="links "> <i class="fas fa-arrow-right "></i> home </a>
+                <a href="Home.php " class="links "> <i class="fas fa-arrow-right "></i> home </a>
                 <a href="# " class="links "> <i class="fas fa-arrow-right "></i> destination </a>
                 <a href="Gallery.html " class="links "> <i class="fas fa-arrow-right "></i> gallery </a>
             </div>
