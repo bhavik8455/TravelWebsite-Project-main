@@ -42,7 +42,7 @@
         <div id="menu-btn" class="fas fa-bars"></div>
 
         <a data-aos="zoom-in-left" data-aos-delay="150" href="#" class="logo">
-            <i class="fas fa-paper-plane"></i>Travel Genie
+            <i class="fas fa-paper-plane"></i>Travelog
         </a>
 
         <nav class="navbar">
@@ -98,7 +98,7 @@
     <section class="home" id="home">
         <div class="content">
             <span data-aos="fade-up" data-aos-delay="150">Make your next trip awesome</span>
-            <h3 data-aos="fade-up" data-aos-delay="300">Travel Genie</h3>
+            <h3 data-aos="fade-up" data-aos-delay="300">Travelog</h3>
             <p data-aos="fade-up" data-aos-delay="450">Travel makes one modest, you see what a tiny place you occupy in
                 the World !</p>
             <a data-aos="fade-up" data-aos-delay="600" href="#" class="btn">book now</a>

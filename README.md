@@ -1,11 +1,11 @@
-# Travel Genie Website
+# Travelog Website
 
-This is the code repository for the Travel Genie website. It is a responsive website that provides information about various temples and pilgrimage destinations in India. Users can explore different destinations, view image galleries, and find relevant information about each place. The website also offers a booking form for users to plan their trips.
+This is the code repository for the Travelog website. It is a responsive website that provides information about various temples and pilgrimage destinations in India. Users can explore different destinations, view image galleries, and find relevant information about each place. The website also offers a booking form for users to plan their trips.
 
 
 ## Getting Started
 
-To get started with the Travel Genie website, you can follow these steps:
+To get started with the Travelog website, you can follow these steps:
 
 1. Clone the repository to your local machine using the following command:
    ```
@@ -32,7 +32,7 @@ To get started with the Travel Genie website, you can follow these steps:
 
 ## Dependencies
 
-The Travel Genie website utilizes the following dependencies:
+The Travelog website utilizes the following dependencies:
 
 - [Font Awesome](https://fontawesome.com/): A library of scalable vector icons that are used for the menu and other icons on the website.
 
@@ -40,10 +40,10 @@ The Travel Genie website utilizes the following dependencies:
 
 ## Usage
 
-The Travel Genie website is ready to use after cloning the repository. You can modify the content, add new destinations or features, and customize the design to suit your requirements. The CSS styles are defined in the `style.css` file, and JavaScript functionality can be added or modified in the `script.js` file.
+The Travelog website is ready to use after cloning the repository. You can modify the content, add new destinations or features, and customize the design to suit your requirements. The CSS styles are defined in the `style.css` file, and JavaScript functionality can be added or modified in the `script.js` file.
 
 Feel free to explore the code and make any desired changes to enhance the website.
 
 ## Contributing
 
-If you would like to contribute to the Travel Genie website, you can fork the repository, make your changes, and submit a pull request. Your contributions are highly appreciated.
+If you would like to contribute to the Travelog website, you can fork the repository, make your changes, and submit a pull request. Your contributions are highly appreciated.

@@ -3,10 +3,19 @@
 session_start();
 
 // Database connection
-$servername = "localhost"; // or your server
-$username = "root"; // your database username
-$password = ""; // your database password
-$dbname = "travel1"; // your database name
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "travel1";
+
+// Include PHPMailer library files
+require 'PHPMailer/Exception.php';
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -34,19 +43,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Prepare an SQL statement for execution
     $stmt = $conn->prepare("INSERT INTO Details (StudentName, StudentEmail, DateOfTravel, NumberOfDays, CollegeName, Branch, HodEmail, ContactDetails) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-    // Check if statement preparation was successful
     if ($stmt === false) {
         die("Error preparing statement: " . $conn->error);
     }
 
-    // Bind variables to a prepared statement as parameters
+    // Bind parameters
     $stmt->bind_param("sssissss", $studentName, $studentEmail, $dateOfTravel, $numberOfDays, $collegeName, $branch, $hodEmail, $contactDetails);
 
     // Execute the statement
     if ($stmt->execute()) {
-        // Redirect to the home page after successful submission
-        header("Location: home.php"); // Change 'home.php' to your actual home page
-        exit(); // Terminate script execution
+        // Send email to the student
+        $mail = new PHPMailer();
+
+        try {
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = '';
+            $mail->Password = '';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            //Recipients
+            $mail->setFrom('', 'Travel Coordinator');
+            $mail->addAddress($studentEmail, $studentName);
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Travel Details Submission Confirmation';
+            $mail->Body = "<p>Dear $studentName,</p><p>Your travel details have been successfully submitted. Here are the details:</p>
+            <ul>
+                <li>Date of Travel: $dateOfTravel</li>
+                <li>Number of Days: $numberOfDays</li>
+                <li>College Name: $collegeName</li>
+                <li>Branch: $branch</li>
+            </ul><p>Thank you!</p>";
+
+            $mail->send();
+            // Redirect after successful submission and email
+            header("Location: home.php");
+            exit();
+        } catch (Exception $e) {
+            $message = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     } else {
         $message = "Error submitting details: " . $stmt->error;
     }
@@ -58,7 +98,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Close the database connection
 $conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

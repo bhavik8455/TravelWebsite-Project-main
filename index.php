@@ -240,7 +240,7 @@ ob_end_flush(); // End output buffering
 <body>
   <!-- Logo Heading with AOS animation at the top center -->
   <h1 class="logo">
-    <i class="fas fa-paper-plane"></i> Travel Genie
+    <i class="fas fa-paper-plane"></i> Travelog
   </h1>
 
   <div class="login-wrap">
