@@ -51,12 +51,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssissss", $studentName, $studentEmail, $dateOfTravel, $numberOfDays, $collegeName, $branch, $hodEmail, $contactDetails);
 
     // Execute the statement
+    // Execute the statement
     if ($stmt->execute()) {
         // Send email to the student
         $mail = new PHPMailer();
 
         try {
-            //Server settings
+            // Server settings
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
@@ -65,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
-            //Recipients
+            // Recipients
             $mail->setFrom('', 'Travel Coordinator');
             $mail->addAddress($studentEmail, $studentName);
 
@@ -73,23 +74,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->isHTML(true);
             $mail->Subject = 'Travel Details Submission Confirmation';
             $mail->Body = "<p>Dear $studentName,</p><p>Your travel details have been successfully submitted. Here are the details:</p>
-            <ul>
-                <li>Date of Travel: $dateOfTravel</li>
-                <li>Number of Days: $numberOfDays</li>
-                <li>College Name: $collegeName</li>
-                <li>Branch: $branch</li>
-            </ul><p>Thank you!</p>";
+        <ul>
+            <li>Date of Travel: $dateOfTravel</li>
+            <li>Number of Days: $numberOfDays</li>
+            <li>College Name: $collegeName</li>
+            <li>Branch: $branch</li>
+        </ul><p>Thank you!</p>";
 
             $mail->send();
-            // Redirect after successful submission and email
-            header("Location: home.php");
+            // Success message
+            // Redirect to the home page
+            header("Location: Home.php");
             exit();
         } catch (Exception $e) {
-            $message = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $message = "Details submitted, but email could not be sent. Error: {$mail->ErrorInfo}";
         }
     } else {
         $message = "Error submitting details: " . $stmt->error;
     }
+
 
     // Close the statement
     $stmt->close();
